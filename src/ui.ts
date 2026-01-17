@@ -132,3 +132,17 @@ export function showSupportWarning(show: boolean) {
   if (el) el.hidden = !show;
 }
 
+export async function updateDiagnostics() {
+  const secure = window.isSecureContext;
+  const hasXR = !!(navigator as any).xr;
+  let immersive: string = 'unknown';
+  try {
+    immersive = hasXR ? String(await (navigator as any).xr.isSessionSupported('immersive-ar')) : 'false';
+  } catch {
+    immersive = 'false';
+  }
+  const set = (id: string, v: string) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('diagSecure', String(secure));
+  set('diagXR', String(hasXR));
+  set('diagImmersive', immersive);
+}

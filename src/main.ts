@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { createBlochSphere, setStateVector, createEntanglementLink } from './bloch';
 import { fromThetaPhi, toThetaPhi, Qubit } from './quantum';
-import { initUI, showSupportWarning } from './ui';
+import { initUI, showSupportWarning, updateDiagnostics } from './ui';
 import { createARButton, createScene, initReticle, onResize, requestHitTestSource, setupARSession, setupRenderer } from './ar';
 
 async function bootstrap() {
@@ -149,6 +149,7 @@ async function bootstrap() {
   // Capability detection
   const xrSupported = navigator.xr && await navigator.xr.isSessionSupported('immersive-ar').catch(() => false);
   showSupportWarning(!xrSupported);
+  void updateDiagnostics();
   if (xrSupported) {
     await setupAR();
   } else {
