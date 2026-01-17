@@ -1,0 +1,21 @@
+{
+  "name": "quantum-ar-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "dev:localhost": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.160.0",
+    "@types/webxr": "^0.5.24",
+    "typescript": "^5.6.3",
+    "vite": "^5.1.0"
+  }
+}

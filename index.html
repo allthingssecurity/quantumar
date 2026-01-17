@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quantum AR Lab</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="ui-root" class="ui-root">
+      <div class="panel">
+        <div class="title">Quantum AR Lab</div>
+        <div id="supportWarning" class="warning" hidden>
+          WebXR AR not available. Showing non‑AR 3D fallback.
+        </div>
+
+        <div class="row">
+          <label class="mode-label">Mode:</label>
+          <div class="mode-toggle">
+            <button id="modeSingle" class="toggle active">Single Qubit</button>
+            <button id="modeEnt" class="toggle">Entanglement</button>
+          </div>
+        </div>
+
+        <div id="singleControls">
+          <div class="row">
+            <label>θ (0..π)</label>
+            <input id="theta" type="range" min="0" max="3.1415926535" step="0.01" />
+            <span id="thetaVal" class="mono"></span>
+          </div>
+          <div class="row">
+            <label>φ (0..2π)</label>
+            <input id="phi" type="range" min="0" max="6.283185307" step="0.01" />
+            <span id="phiVal" class="mono"></span>
+          </div>
+          <div class="row wrap">
+            <button data-gate="reset">Reset |0⟩</button>
+            <button data-gate="H">H</button>
+            <button data-gate="X">X</button>
+            <button data-gate="Y">Y</button>
+            <button data-gate="Z">Z</button>
+            <button data-gate="S">S</button>
+            <button data-gate="T">T</button>
+            <button id="measure">Measure</button>
+          </div>
+          <div class="row col info">
+            <div>Amplitudes:</div>
+            <div class="mono">a = <span id="ampA"></span></div>
+            <div class="mono">b = <span id="ampB"></span></div>
+            <div class="mono">P(0) = <span id="p0"></span></div>
+            <div class="mono">P(1) = <span id="p1"></span></div>
+            <div class="mono">Last measurement: <span id="measureResult">—</span></div>
+          </div>
+        </div>
+
+        <div id="entControls" hidden>
+          <div class="row wrap">
+            <button id="prepBell">Prep |Φ+⟩</button>
+            <button id="measureLeft">Measure Left</button>
+            <button id="measureRight">Measure Right</button>
+            <button id="resetEnt">Reset</button>
+          </div>
+          <div class="row col info">
+            <div>State: |Φ+⟩ = (|00⟩ + |11⟩)/√2</div>
+            <div class="mono">Correlation: Perfect (same outcomes)</div>
+            <div class="mono">Left: <span id="leftResult">unmeasured</span></div>
+            <div class="mono">Right: <span id="rightResult">unmeasured</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARButton is injected by code if supported -->
+    <div id="ar-button-slot" class="ar-button-slot"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+  </html>
+
