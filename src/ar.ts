@@ -28,8 +28,14 @@ export function createScene() {
 }
 
 export function createARButton(renderer: THREE.WebGLRenderer, slot: HTMLElement): HTMLElement {
+  // Prefer ARButton if available; also mirror to a fixed custom button for UX
   const button = ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] });
   slot.replaceChildren(button);
+  const custom = document.getElementById('enterAR');
+  if (custom) {
+    custom.hidden = false;
+    custom.onclick = () => (button as HTMLButtonElement).click();
+  }
   return button;
 }
 
@@ -62,4 +68,3 @@ export async function requestHitTestSource(session: XRSession, referenceSpace: X
   // @ts-expect-error - non-standard types until lib.dom adds them
   return await session.requestHitTestSource({ space: viewerSpace });
 }
-
